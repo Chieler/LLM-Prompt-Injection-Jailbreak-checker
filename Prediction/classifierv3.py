@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
 from sentence_transformers import SentenceTransformer
 class PromptClassifier:
-    def __init__(self, embedding_model="all-MiniLM-L6-v2", model_path="rf.joblib"):
+    def __init__(self, embedding_model="all-MiniLM-L6-v2", model_path="../Resources/rf.joblib"):
         self.sentence_transformer = SentenceTransformer(embedding_model)
         self.model = RandomForestClassifier()
         self.model_path = model_path
@@ -14,11 +14,11 @@ class PromptClassifier:
         return self.sentence_transformer.encode(texts, show_progress_bar=True)
 
     def prepare_data(self, texts, labels):
-        if os.path.exists("embeddings.joblib"):
-            embeddings = load("embeddings.joblib")
+        if os.path.exists("../Resources/embeddings.joblib"):
+            embeddings = load("../Resources/embeddings.joblib")
         else:
             embeddings = self.get_embeddings(texts)
-            dump(embeddings, "embeddings.joblib")
+            dump(embeddings, "../Resources/embeddings.joblib")
 
         X_train, X_test, y_train, y_test = train_test_split(
             embeddings, labels, test_size=0.2, random_state=42, stratify=labels

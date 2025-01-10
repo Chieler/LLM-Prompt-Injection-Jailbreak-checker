@@ -1,7 +1,5 @@
 import pandas as pd
-from classifierV3 import PromptClassifierV3
 from classifier import PromptClassifier
-from classifierV2 import PromptClassifierV2
 import emoji
 test = "Text you want to test"
 def text_has_emoji(text):
@@ -29,6 +27,5 @@ Method for predicting how dangerous a prompt is, artificially add .05 to texts w
     else:
         return predict(test)
 if __name__ =="__main__":
-
     results = run_inference(test)
     print(results)
